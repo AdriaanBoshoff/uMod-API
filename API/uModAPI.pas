@@ -46,6 +46,11 @@ begin
       Result.rateLimit.total := rest.Response.Headers.Values['x-ratelimit-limit'].ToInteger;
       Result.rateLimit.remaining := rest.Response.Headers.Values['x-ratelimit-remaining'].ToInteger;
 
+      // Response Info
+      Result.currentPage := rest.Response.JSONValue.GetValue<integer>('current_page');
+      Result.lastPage := rest.Response.JSONValue.GetValue<integer>('last_page');
+      Result.totalPlugins := rest.Response.JSONValue.GetValue<integer>('total');
+
       SetLength(Result.plugins, (rest.Response.JSONValue.FindValue('data') as TJSONArray).Count);
       var pluginIndex := 0;
       for var jPlugin in rest.Response.JSONValue.FindValue('data') as TJSONArray do
