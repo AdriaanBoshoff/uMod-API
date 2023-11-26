@@ -32,7 +32,9 @@ begin
     rest.AddParameter('sort', 'downloads', TRESTRequestParameterKind.pkQUERY);
     rest.AddParameter('categories', 'universal,rust', TRESTRequestParameterKind.pkQUERY);
     rest.AddParameter('page', Page.ToString, TRESTRequestParameterKind.pkQUERY);
-    rest.AddParameter('query', SearchText, TRESTRequestParameterKind.pkQUERY);
+
+    if not SearchText.IsEmpty then
+      rest.AddParameter('query', SearchText, TRESTRequestParameterKind.pkQUERY);
 
     rest.Execute;
 
@@ -62,6 +64,7 @@ begin
         Result.plugins[pluginIndex].downloadCount := jPlugin.GetValue<integer>('downloads');
         Result.plugins[pluginIndex].downloadsShortened := jPlugin.GetValue<string>('downloads_shortened');
         Result.plugins[pluginIndex].downloadURL := jPlugin.GetValue<string>('download_url');
+        Result.plugins[pluginIndex].donateURL := jPlugin.GetValue<string>('donate_url');
         Result.plugins[pluginIndex].iconURL := jPlugin.GetValue<string>('icon_url');
         Result.plugins[pluginIndex].slug := jPlugin.GetValue<string>('slug');
         Result.plugins[pluginIndex].authorName := jPlugin.GetValue<string>('author');
@@ -71,6 +74,7 @@ begin
         Result.plugins[pluginIndex].version := jPlugin.GetValue<string>('latest_release_version');
         Result.plugins[pluginIndex].createdDTM := jPlugin.GetValue<string>('published_at');
         Result.plugins[pluginIndex].updatedDTM := jPlugin.GetValue<string>('latest_release_at');
+        Result.plugins[pluginIndex].tags := jPlugin.GetValue<string>('tags_all');
 
         Inc(pluginIndex);
       end;

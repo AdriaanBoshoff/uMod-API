@@ -17,6 +17,7 @@ type
     downloadCount: Integer;
     downloadsShortened: string;
     downloadURL: string;
+    donateURL: string;
     iconURL: string;
     slug: string;
     authorName: string;
@@ -26,6 +27,7 @@ type
     version: string;
     createdDTM: string;
     updatedDTM: string;
+    tags: string;
   end;
 
 type
